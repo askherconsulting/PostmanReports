@@ -1,6 +1,6 @@
-# This is an intermediate workflow to help you produce a HTML extra test results report
+# This workflow will help you to produce an HTML extra test results report
 
-name: "Newman Tests"
+name: Newman Tests
 on: [push, pull_request]
 
 jobs:
@@ -22,10 +22,12 @@ jobs:
         run: |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
+          
     # Make directory to upload the test results
       - name: Make Directory for results
         run: mkdir -p testResults
-      
+        
+   # Run the POSTMAN collection
       - name: Run API Tests
         run: newman run "Restful Booker BVT.postman_collection.json" -e Production.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 
